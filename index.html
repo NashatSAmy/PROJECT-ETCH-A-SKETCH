@@ -8,16 +8,14 @@
     <script src="main.js" defer></script>
     <title>PROJECT-ETCH-A-SKETCH</title>
   </head>
-  <body>
+  <body ondragstart="return false;" ondrop="return false;">
     <div id="tool-bar">
       <label for="grid-sizeX"
         >X Side Square Number:
-        <input type="number" name="grid-size" value="0" />
+        <input type="range" name="grid-size" min="1" max="100" />
       </label>
-      <label for="grid-sizeY"
-        >Y Side Square Number:
-        <input type="number" name="grid-size" value="0" />
-      </label>
+      <button type="reset" name="reset">Reset</button>
+      <button type="button" name="rainbow">Rainbow Mode</button>
       <label for="pickAColor"
         >Pick A Color
         <input type="color" name="pickAColor" />
