@@ -4,10 +4,12 @@ const gridSize = document.querySelector("[name=grid-size]");
 const color = document.getElementsByName("pickAColor");
 const reset = document.getElementsByName("reset");
 const rainbowMode = document.getElementsByName("rainbow");
+const easer = document.getElementsByName("erase");
 
 // Global variables.
 let mouseDown = false;
 let rainbowModeOn = false;
+let easerOn = false;
 let hue = 0;
 let light = 100;
 
@@ -20,13 +22,14 @@ function clearGrid() {
 
 // Function that will populate the grid system with the right number of square divs.
 function populateGridSystem() {
-  nX = gridSize.value
+  nX = gridSize.value;
   clearGrid();
   while (grid.childElementCount < nX * nX) {
     const gridDiv = document.createElement("div");
     gridDiv.setAttribute("name", "grid-div");
     gridDiv.addEventListener("mouseenter", startDrawing);
     gridDiv.addEventListener("mouseenter", toggleRainbowMode);
+    gridDiv.addEventListener("mouseenter", erasing);
     grid.appendChild(gridDiv);
   }
   grid.style.gridTemplateRows = `repeat(${nX}, 1fr)`;
@@ -42,7 +45,8 @@ function startDrawing(e) {
     e.target.getAttribute("name") == null ||
     !e.target.getAttribute("name") == "grid-div" ||
     mouseDown == false ||
-    rainbowModeOn == true
+    rainbowModeOn == true ||
+    easerOn == true
   )
     return;
   e.target.style.backgroundColor = color[0].value;
@@ -62,6 +66,18 @@ function toggleRainbowMode(e) {
   light <= 0 ? (light = 100) : (light -= 10);
 }
 
+// Function that allow the user to erase.
+function erasing(e) {
+  if (
+    e.target.getAttribute("name") == null ||
+    !e.target.getAttribute("name") == "grid-div" ||
+    mouseDown == false ||
+    rainbowModeOn == true ||
+    easerOn == false
+  )
+    return;
+  e.target.style.backgroundColor = "#fff";
+}
 
 // Events listeners.
 gridSize.addEventListener("input", populateGridSystem);
@@ -70,12 +86,15 @@ grid.addEventListener("mouseup", () => (mouseDown = false));
 
 grid.addEventListener("mousedown", startDrawing);
 grid.addEventListener("mousedown", toggleRainbowMode);
+grid.addEventListener("mousedown", erasing);
 
 rainbowMode[0].addEventListener(
   "click",
   () => (rainbowModeOn = !rainbowModeOn)
 );
 
+easer[0].addEventListener("click", () => (easerOn = !easerOn));
+
 reset[0].addEventListener("click", populateGridSystem);
 
-window.onload = populateGridSystem()
+window.onload = populateGridSystem();
