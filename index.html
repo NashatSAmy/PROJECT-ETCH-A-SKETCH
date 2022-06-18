@@ -9,19 +9,23 @@
     <title>PROJECT-ETCH-A-SKETCH</title>
   </head>
   <body ondragstart="return false;" ondrop="return false;">
-    <div id="tool-bar">
-      <label for="grid-sizeX"
-        >X Side Square Number:
-        <input type="range" name="grid-size" min="1" max="100" />
-      </label>
-      <button type="reset" name="reset">Reset</button>
-      <button type="button" name="rainbow">Rainbow Mode</button>
-      <button type="button" name="erase">Eraser</button>
-      <label for="pickAColor"
-        >Pick A Color
-        <input type="color" name="pickAColor" />
-      </label>
+    <div id="logo">Etch A Sketch</div>
+    <div id="main-content">
+      <div id="tool-bar">
+        <div id="size">
+          <p>Grid Size <span name="gs"></span> X <span name="gs"></span></p>
+          <input type="range" name="grid-size" min="1" max="100" />
+        </div>
+        <button type="button" name="gridOn" class="btn">Show Grid</button>
+        <button type="reset" name="reset" class="btn">Reset</button>
+        <button type="button" name="rainbow" class="btn">
+          Rainbow Mode <span name="on-off">OFF</span>
+        </button>
+        <button type="button" name="erase" class="btn">Eraser</button>
+        <input type="color" name="color" />
+      </div>
+      <div id="grid-system"></div>
     </div>
-    <div id="grid-system"></div>
+    <footer>Nashat Samy &copy; 2022</footer>
   </body>
 </html>
